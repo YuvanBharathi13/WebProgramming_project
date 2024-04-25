@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  background-color: #21a1f1;
+}
+.App h1 {
+  font-size: 3em;
+  color: #000;
+}
+
+.game-container {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(35, 35, 35);
+  box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 8cm;
+}
+
+.input-section {
+  margin-bottom: 30px;
+}
+
+input[type="number"] {
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #61dafb;
+  color: #000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #21a1f1;
+}
+
+.result-section {
+  margin-bottom: 20px;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.score {
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+}
+
+.score h2 {
+  font-size: 20px;
+  color: black;
+}
+
+
