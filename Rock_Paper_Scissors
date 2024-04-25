@@ -1,0 +1,205 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: black;
+        position: relative;
+        background-image: url("rock_back_3.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+        background-position: 35% 50%;
+      }
+      .choices {
+        margin-bottom: 30px;
+      }
+      .choices button {
+        font-size: 8rem;
+        width: 160px;
+        margin: 1cm 10px;
+        border-radius: 250px;
+        border-color: purple;
+        border-width: 5px;
+        background-color: hsl(200, 100%, 50%);
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+      }
+      .choices button:hover {
+        background-color: aquamarine;
+        transform: scale(1.1);
+      }
+      #chumma {
+        font-size: 5rem;
+        margin: 20px 0;
+        color: black;
+        padding: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+        width: 60%;
+      }
+
+      #player_display,
+      #computer_display,
+      #chumma {
+        font-size: 2rem;
+        background-color: #ce0000;
+        color: white;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        width: 350px;
+        margin: 10px 0;
+        text-align: center;
+      }
+      .score_board {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 350px;
+        height: auto;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        background-color: #ce0000;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        color: whitesmoke;
+        /* border-radius: 15px; */
+        padding: 20px;
+      }
+      .score_name,
+      .score {
+        padding: 10px;
+        text-align: center;
+      }
+      .score_name {
+        font-weight: bold;
+        padding: 10px 0;
+      }
+      .score {
+        background-color: white;
+        /* border-radius: 8px; */
+        color: black;
+        font-family: "Seven Segment", sans-serif;
+        font-weight: bold;
+        font-size: 50px;
+        justify-content: center;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0 10px;
+      }
+      #score_name_1 {
+        color: whitesmoke;
+        font-size: larger;
+      }
+      #score_name_2 {
+        color: whitesmoke;
+        font-size: larger;
+      }
+      .display_section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+      .audio-control {
+        font-size: 2rem;
+        padding: 10px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: auto;
+        border-radius: 5px;
+        background-color: rgb(110, 231, 11);
+        border-color: black;
+        cursor: pointer;
+      }
+      .audio-control:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="backgroundMusic" src="Solaiyamma _Raasa_Ilayaraasa.mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <button class="audio-control" onclick="play_audio()">PLAY MUSIC</button>
+    <div class="score_board">
+      <div class="score_name" id="score_name_1">PLAYER</div>
+      <div class="score_name" id="score_name_2">COMPUTER</div>
+      <div class="score" id="play_score">0</div>
+      <div class="score" id="comp_score">0</div>
+    </div>
+    <div class="choices">
+      <button onclick="play_game('rock')">👊</button>
+      <button onclick="play_game('paper')">🤚</button>
+      <button onclick="play_game('scissors')">✌️</button>
+    </div>
+    <section class="display_section">
+      <div id="player_display">PLAYER :</div>
+      <div id="computer_display">COMPUTER :</div>
+      <h1 id="chumma"></h1>
+    </section>
+
+    <script>
+      const choices = ["rock", "paper", "scissors"];
+      const player_display = document.getElementById("player_display");
+      const computer_display = document.getElementById("computer_display");
+      const result_display = document.getElementById("result_display");
+      var player_score = 0;
+      var computer_score = 0;
+      function play_game(player_choice) {
+        const computer_choice = choices[Math.floor(Math.random() * 3)];
+        player_display.textContent = `PLAYER: ${player_choice.toUpperCase()}`;
+        computer_display.textContent = `COMPUTER: ${computer_choice.toUpperCase()}`;
+        if (player_choice == computer_choice) {
+          document.getElementById("chumma").innerHTML = "IT IS A TIE";
+        } else if (player_choice == "rock" && computer_choice == "scissors") {
+          player_score++;
+          document.getElementById("chumma").innerHTML = "PLAYER WINS";
+          document.getElementById("play_score").innerHTML = player_score;
+        } else if (player_choice == "scissors" && computer_choice == "rock") {
+          computer_score++;
+          document.getElementById("chumma").innerHTML = "COMPUTER WINS";
+          document.getElementById("comp_score").innerHTML = computer_score;
+        } else if (player_choice == "rock" && computer_choice == "paper") {
+          computer_score++;
+          document.getElementById("chumma").innerHTML = "COMPUTER WINS";
+          document.getElementById("comp_score").innerHTML = computer_score;
+        } else if (player_choice == "paper" && computer_choice == "rock") {
+          player_score++;
+          document.getElementById("chumma").innerHTML = "PLAYER WINS";
+          document.getElementById("play_score").innerHTML = player_score;
+        } else if (player_choice == "scissors" && computer_choice == "paper") {
+          player_score++;
+          document.getElementById("chumma").innerHTML = "PLAYER WINS";
+          document.getElementById("play_score").innerHTML = player_score;
+        } else if (player_choice == "paper" && computer_choice == "scissors") {
+          computer_score++;
+          document.getElementById("chumma").innerHTML = "COMPUTER WINS";
+          document.getElementById("comp_score").innerHTML = computer_score;
+        }
+      }
+
+      const audio = document.getElementById("backgroundMusic");
+      const audioButton = document.querySelector(".audio-control");
+
+      function play_audio() {
+        if (audio.paused) {
+          audio.play();
+          audioButton.textContent = "Pause Music";
+        } else {
+          audio.pause();
+          audioButton.textContent = "Play Music";
+        }
+      }
+    </script>
+  </body>
+</html>
