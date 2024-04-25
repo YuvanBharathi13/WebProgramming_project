@@ -1,0 +1,62 @@
+import React, { useState, useEffect } from "react";
+import "./App.css";
+
+function App() {
+  const [numberToGuess, setNumberToGuess] = useState(generateRandomNumber());
+  const [guess, setGuess] = useState("");
+  const [playerScore, setPlayerScore] = useState(0);
+  const [computerScore, setComputerScore] = useState(0);
+  const [resultMessage, setResultMessage] = useState("");
+
+  useEffect(() => {
+    setNumberToGuess(generateRandomNumber());
+  }, []);
+
+  function generateRandomNumber() {
+    return Math.floor(Math.random() * 20) + 1;
+  }
+
+  function handleGuess() {
+    if (parseInt(guess) === numberToGuess) {
+      setPlayerScore(playerScore + 1);
+      setResultMessage("Correct! Well done.");
+    } else {
+      setComputerScore(computerScore + 1);
+      setResultMessage(`Incorrect! The correct number was ${numberToGuess}.`);
+    }
+    setNumberToGuess(generateRandomNumber());
+    setGuess("");
+  }
+
+  return (
+    <div className="App">
+      <h1 className="title">Guess the Number</h1>
+      <div className="game-container">
+        <div className="input-section">
+          <input
+            type="number"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            placeholder="Enter a number (1-20)"
+            min="1"
+            max="20"
+          />
+          <button onClick={handleGuess}>Guess!</button>
+        </div>
+        <div className="result-section">
+          <h2>{resultMessage}</h2>
+        </div>
+        <div className="scoreboard">
+          <div className="score">
+            <h2>Player Score: {playerScore}</h2>
+          </div>
+          <div className="score">
+            <h2>Computer Score: {computerScore}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
