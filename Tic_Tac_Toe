@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family:Georgia, 'Times New Roman', Times, serif
+}
+body {
+    height: 100vh;
+    background-image: url("https://source.unsplash.com/random");
+    background-size: cover; 
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+}
+html {
+  font-size: 16px;
+}
+.wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+.container {
+  width: 70vmin;
+  height: 70vmin;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vmin;
+}
+.button-option {
+  background:white;
+  height: 4cm;
+  width: 4cm;
+  border-width: 5px;
+  border-color: black;
+  border-radius: 6px;
+  font-size: 12vmin;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+#restart {
+  font-size: 1.3em;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: #0a0027;
+  color: #ffffff;
+  border: none;
+  position: relative;
+  margin: 1.5em auto 0 auto;
+  display: block;
+}
+.popup {
+    background-color: rgba(255, 123, 0, 0.95); /* Semi-transparent gold */
+    color: #333; /* Dark text color for readability */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2em;
+    font-size: 4vmin; 
+    border-radius: 0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    animation: fadeIn 0.5s ease-out;
+    padding: 2em; 
+    background-image: url();
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#new-game, #message {
+    font-size: 2em;
+    padding: 0.8em 1.6em; 
+    background-color: #0a0027; 
+    color: #ffffff; 
+    border: none;
+    cursor: pointer; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); 
+    transition: background-color 0.3s, transform 0.3s; 
+}
+
+#new-game:hover, #restart:hover {
+    background-color: #f5f5f5; 
+    color: #0a0027; 
+    transform: scale(1.05); 
+}
+
+#message {
+    margin-bottom: 1em; 
+}
+
+.popup.hide {
+  display: none;
+}
+    </style>
+</head>
+<body>
+   <div class="wrapper">
+       <div class="container">
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+           <button class="button-option"></button>
+       </div>
+       <button id="restart">Restart</button>
+   </div>
+
+   <div class="popup hide">
+       <p id="message">Sample Message</p>
+       <button id="new-game">New Game</button>
+   </div>
+   <script>
+    let btnRef = document.querySelectorAll(".button-option");
+let popupRef = document.querySelector(".popup");
+let newgameBtn = document.getElementById("new-game");
+let restartBtn = document.getElementById("restart");
+let msgRef = document.getElementById("message");
+let winningPattern = [
+  [0, 1, 2],
+  [0, 3, 6],
+  [2, 5, 8],
+  [6, 7, 8],
+  [3, 4, 5],
+  [1, 4, 7],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+let xTurn = true;
+let count = 0;
+
+const disableButtons = () => {
+  btnRef.forEach((element) => (element.disabled = true));
+  popupRef.classList.remove("hide");
+};
+
+const enableButtons = () => {
+  btnRef.forEach((element) => {
+    element.innerText = "";
+    element.disabled = false;
+  });
+  popupRef.classList.add("hide");
+};
+const winFunction = (letter) => {
+  disableButtons();
+  if (letter == "X") {
+    msgRef.innerHTML = " X Wins";
+  } else {
+    msgRef.innerHTML = " O Wins";
+  }
+};
+
+const drawFunction = () => {
+  disableButtons();
+  msgRef.innerHTML = "It's a Draw";
+};
+
+newgameBtn.addEventListener("click", () => {
+  count = 0;
+  enableButtons();
+});
+restartBtn.addEventListener("click", () => {
+  count = 0;
+  enableButtons();
+});
+
+const winChecker = () => {
+  for (let i of winningPattern) {
+    let [element1, element2, element3] = [
+      btnRef[i[0]].innerText,
+      btnRef[i[1]].innerText,
+      btnRef[i[2]].innerText,
+    ];
+    if (element1 != "" && (element2 != "") & (element3 != "")) {
+      if (element1 == element2 && element2 == element3) {
+        winFunction(element1);
+      }
+    }
+  }
+};
+
+btnRef.forEach((element) => {
+  element.addEventListener("click", () => {
+    if (xTurn) {
+      xTurn = false;
+      element.innerText = "X";
+      element.disabled = true;
+    } else {
+      xTurn = true;
+      element.innerText = "O";
+      element.disabled = true;
+    }
+    count += 1;
+    if (count == 9) {
+      drawFunction();
+    }
+    winChecker();
+  });
+});
+window.onload = enableButtons;
+   </script>
+</body>
+</html>
