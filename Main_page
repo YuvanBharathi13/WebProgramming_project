@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: -webkit-linear-gradient(90deg, #ff00cc, #3333ff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .game-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px;
+      }
+      .game-box {
+        width: 300px;
+        height: 300px;
+        border: 2px solid #333;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      .game-box:hover {
+        background-color: #f5f5f5;
+        transform: scale(1.1);
+      }
+      .game-title {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: #f5f5f5;
+        font-size: 0.5cm;
+      }
+      .heading {
+        text-align: center;
+        font-size: 3cm;
+      }
+      #rock_paper {
+        background-image: url("paper_back_1.jpg");
+      }
+      #tic_tac {
+        background-image: url("tic_back_1.jpg");
+      }
+      #guess {
+        background-image: url("guess_back.jpg");
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1 class="heading">YUVAN'S PLAY HOUSE</h1> -->
+    <div class="container">
+      <div class="game-section">
+        <div
+          class="game-box"
+          id="tic_tac"
+          onclick="location.href=`http://localhost:5500/Tic_Tac_Toe/tictactoe.html`"
+        ></div>
+        <div class="game-title">TIC TAC TOE</div>
+      </div>
+      <div class="game-section">
+        <div
+          class="game-box"
+          id="rock_paper"
+          onclick="location.href=`http://localhost:5500/Rock_Paper_scissors/ro_pa_sc.html`"
+        ></div>
+        <div class="game-title">ROCK PAPER SCISSORS</div>
+      </div>
+      <div class="game-section">
+        <div
+          class="game-box"
+          id="guess"
+          onclick="location.href=`http://localhost:3000/my-app/src/App.js`"
+        ></div>
+        <div class="game-title">GUESS THE NUMBER</div>
+      </div>
+    </div>
+  </body>
+</html>
